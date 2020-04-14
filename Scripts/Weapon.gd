@@ -29,7 +29,7 @@ func check_collision():
 		var collider = raycast.get_collider()
 		if collider.is_in_group("Enemies"):
 			collider.queue_free()
-			current_score += 10
+			current_score += 20
 
 func fire():
 	can_fire = false

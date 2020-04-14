@@ -1,37 +1,20 @@
 extends KinematicBody
 
-var state = ""
-var speed = 1
-onready var Scan = $Scanner
-var health = 100
+func _on_Area_body_entered(body):
+	set_color_yellow()
 
-func change_state(s):
-	state = s
-	var material = $Body.mesh.surface_get_material(0)
-	if state == "scanning":
-		material.albedo_color = Color(0,1,0)
-	if state == "found":
-		material.albedo_color = Color(1,1,0)
-	if state == "shooting":
-		material.albedo_color = Color(1,0,0)
-	$Body.set_surface_material(0,material)
+func _on_Area_body_exited(body):
+	set_color_green()
 
-func _ready():
-	change_state("searching")
+func set_color_red():
+	$Body.get_surface_material(0).set_albedo(Color(1,0,0))
 
-func _physics_process(delta):
-	if state == "searching":
-		rotate(Vector3(0,1,0),speed*delta)
-		var c = Scan.get_collider()
-		if c != null and c.name == "Player":
-			change_state("found")
-	if state == "found":
-		$Timer.start()
-	if state == "shooting":
-		pass
+func set_color_yellow():
+	$Body.get_surface_material(0).set_albedo(Color(1,1,0))
 
-func _on_Timer_timeout():
-	var c = Scan.get_collider()
-	if c != null and c.name == "Player":
-		if state == "found":
-			change_state("shooting")
+func set_color_green():
+	$Body.get_surface_material(0).set_albedo(Color(0,1,0))
+
+func _on_Area2_body_entered(body):
+	set_color_red()
+

@@ -6,8 +6,8 @@ export var clip_size = 4
 export var reload_rate = 2
 
 onready var raycast = $"../Player/Pivot/Camera/Look"
-onready var ammo_label = $"../Node/Ammo"
-onready var score_label = $"../Node/Score"
+onready var ammo_label = $"../UI/Ammo"
+onready var score_label = $"../UI/Score"
 
 var current_ammo = clip_size
 var can_fire = true
